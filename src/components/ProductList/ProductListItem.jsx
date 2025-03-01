@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import routes from "routes";
 import { buildUrl } from "utils/url";
-import AddToCart from "components/AddToCart";
+import AddToCart from "../commons/AddToCart";
 
 const ProductListItem = ({
   image_url: imageUrl,
@@ -22,7 +22,7 @@ const ProductListItem = ({
       {name}
     </Typography>
     <Typography>${offerPrice}</Typography>
-    <AddToCart {...{ isInCart, toggleIsInCart }} />
+    <AddToCart {...{ slug }} />
   </Link>
 );
 
