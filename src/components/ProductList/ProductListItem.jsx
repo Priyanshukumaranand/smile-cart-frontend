@@ -3,11 +3,14 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import routes from "routes";
 import { buildUrl } from "utils/url";
+import AddToCart from "components/AddToCart";
 
 const ProductListItem = ({
   image_url: imageUrl,
   name,
   offer_price: offerPrice,
+  isInCart,
+  toggleIsInCart,
   slug,
 }) => (
   <Link
@@ -19,6 +22,7 @@ const ProductListItem = ({
       {name}
     </Typography>
     <Typography>${offerPrice}</Typography>
+    <AddToCart {...{ isInCart, toggleIsInCart }} />
   </Link>
 );
 
@@ -28,6 +32,8 @@ ProductListItem.propTypes = {
   name: PropTypes.string.isRequired,
   offer_price: PropTypes.number.isRequired,
   slug: PropTypes.string.isRequired,
+  isInCart: PropTypes.bool.isRequired,
+  toggleIsInCart: PropTypes.func.isRequired,
 };
 
 export default ProductListItem;
