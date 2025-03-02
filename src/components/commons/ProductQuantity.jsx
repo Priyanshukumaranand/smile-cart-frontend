@@ -1,22 +1,21 @@
-import { Button } from "neetoui";
 import useSelectedQuantity from "components/hooks/useSelectedQuantity";
 import { TooltipWrapper } from "components/commons";
-import { Input } from "neetoui";
-import { Toastr } from "neetoui";
 import { useRef } from "react";
-import { paths } from "ramda";
-import useCartItemsStore from "stores/useCartItemsStore";
-import { shallow } from "zustand/shallow";
+import { Toastr, Input, Button } from "neetoui";
+import { VALID_COUNT_REGEX } from "./constants";
+import PropTypes from "prop-types";
+// import { product } from "ramda";
+// import { paths } from "ramda";
+// import useCartItemsStore from "stores/useCartItemsStore";
+// import { shallow } from "zustand/shallow";
 
 const ProductQuantity = ({ slug, availableQuantity }) => {
-  const countInputFocus = useRef(null);
   const { selectedQuantity, setSelectedQuantity } = useSelectedQuantity(slug);
+
+  const countInputFocus = useRef(null);
+
   const parsedSelectedQuantity = parseInt(selectedQuantity) || 0;
   const isNotValidQuantity = parsedSelectedQuantity >= availableQuantity;
-  const preventNavigation = e => {
-    e.stopPropagation();
-    e.preventDefault();
-  };
 
   const handleSetCount = event => {
     const { value } = event.target;
@@ -32,12 +31,16 @@ const ProductQuantity = ({ slug, availableQuantity }) => {
       setSelectedQuantity(value);
     }
   };
+  const preventNavigation = e => {
+    e.stopPropagation();
+    e.preventDefault();
+  };
 
   return (
     <div className="neeto-ui-border-black neeto-ui-rounded inline-flex flex-row items-center border">
       <Button
         className="focus-within:ring-0"
-        disabled={isNotValidQuantity}
+        // disabled={isNotValidQuantity}
         label="-"
         style="text"
         onClick={e => {
@@ -51,10 +54,10 @@ const ProductQuantity = ({ slug, availableQuantity }) => {
         contentSize="2"
         ref={countInputFocus}
         value={selectedQuantity}
-        onClick={preventNavigation}
         onChange={handleSetCount}
+        onClick={preventNavigation}
       />
-      {selectedQuantity}
+      {/* {selectedQuantity} */}
       <TooltipWrapper
         content="Reached maximum units"
         position="top"
@@ -73,6 +76,11 @@ const ProductQuantity = ({ slug, availableQuantity }) => {
       </TooltipWrapper>
     </div>
   );
+};
+
+ProductQuantity.propTypes = {
+  slug: PropTypes.string.isRequired,
+  availableQuantity: PropTypes.number.isRequired,
 };
 
 export default ProductQuantity;

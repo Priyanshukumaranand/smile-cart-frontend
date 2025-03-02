@@ -10,7 +10,7 @@ const ProductListItem = ({
   name,
   offer_price: offerPrice,
   slug,
-  availableQuantity,
+  available_quantity: availableQuantity,
 }) => (
   <Link
     className="neeto-ui-border-black neeto-ui-rounded-xl flex w-48 flex-col items-center justify-between border p-4"
@@ -33,7 +33,7 @@ ProductListItem.propTypes = {
   slug: PropTypes.string.isRequired,
   isInCart: PropTypes.bool.isRequired,
   toggleIsInCart: PropTypes.func.isRequired,
-  availableQuantity: PropTypes.number.isRequired,
+  available_quantity: PropTypes.number.isRequired,
 };
 
 export default ProductListItem;

@@ -38,13 +38,13 @@ const Product = () => {
     name,
     description,
     mrp,
-    offerPrice,
-    imageUrl,
-    imageUrls,
-    availableQuantity,
+    offer_price: offerPrice,
+    image_url: imageUrl,
+    image_urls: imageUrls,
+    available_quantity: availableQuantity,
   } = product.data || {};
   // console.log(product.data);
-  const totalDiscounts = mrp - offer_price;
+  const totalDiscounts = mrp - offerPrice;
   const discountPercentage = ((totalDiscounts / mrp) * 100).toFixed(1);
 
   if (isError) {
@@ -60,13 +60,10 @@ const Product = () => {
       <div className="mt-16 flex gap-4">
         <div className="w-2/5">
           <div className="flex justify-center gap-16">
-            {isNotNil(image_urls) ? (
-              <Carousel
-                imageUrls={append(image_url, image_urls)}
-                title={name}
-              />
+            {isNotNil(imageUrls) ? (
+              <Carousel imageUrls={append(imageUrl, imageUrls)} title={name} />
             ) : (
-              <img alt={name} className="w-48" src={image_url} />
+              <img alt={name} className="w-48" src={imageUrl} />
             )}
           </div>
         </div>
@@ -74,7 +71,7 @@ const Product = () => {
           <Typography>{description}</Typography>
           <Typography>MRP: {mrp}</Typography>
           <Typography className="font-semibold">
-            Offer price: {offer_price}
+            Offer price: {offerPrice}
           </Typography>
           <Typography className="font-semibold text-green-600">
             {discountPercentage}% off

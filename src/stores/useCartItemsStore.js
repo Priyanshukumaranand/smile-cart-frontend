@@ -1,12 +1,13 @@
 import { assoc, dissoc } from "ramda";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { isNotEmpty } from "neetocist";
 
 const useCartItemsStore = create(
   persist(
     set => ({
-      cartItems: [],
-      toggleIsInCart: (slug, quantity) =>
+      cartItems: {},
+      setSelectedQuantity: (slug, quantity) =>
         set(({ cartItems }) => {
           if (quantity <= 0 && isNotEmpty(quantity)) {
             return { cartItems: dissoc(slug, cartItems) };
