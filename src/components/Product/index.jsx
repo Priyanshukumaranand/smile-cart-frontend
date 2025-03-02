@@ -5,22 +5,24 @@ import { isNotNil, append } from "ramda";
 import Carousel from "./Carousel";
 import productsApi from "apis/products";
 import { Header, PageNotFound, PageLoader } from "components/commons";
+import { error } from "bfj/src/events";
+import AddToCart from "components/commons/AddToCart";
 // import { LeftArrow } from "neetoicons";
 // import axios from "axios";
 // import { IMAGE_URLS } from "./constants";
 
 const Product = () => {
   const { slug } = useParams();
-  const history = useHistory();
+  // const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState({});
   const [isError, setIsError] = useState(false);
 
   const fetchProduct = async () => {
     try {
-      const data = await productsApi.fetch({ searchTerm: searchKey });
+      const response = await productsApi.show(slug);
       // console.log(response.data);
-      setProduct(data.products);
+      setProduct(response);
     } catch (error) {
       setIsError(true);
     } finally {
@@ -31,14 +33,24 @@ const Product = () => {
   useEffect(() => {
     fetchProduct();
   }, []);
-
-  const { name, description, mrp, offer_price, image_urls, image_url } =
-    product.data || {};
+  // console.log(product);
+  const {
+    name,
+    description,
+    mrp,
+    offerPrice,
+    imageUrl,
+    imageUrls,
+    availableQuantity,
+  } = product.data || {};
   // console.log(product.data);
   const totalDiscounts = mrp - offer_price;
   const discountPercentage = ((totalDiscounts / mrp) * 100).toFixed(1);
 
-  if (isError) return <PageNotFound />;
+  if (isError) {
+    // console.log(isError);
+    return <PageNotFound />;
+  }
   if (isLoading) {
     return <PageLoader />;
   }
@@ -67,6 +79,7 @@ const Product = () => {
           <Typography className="font-semibold text-green-600">
             {discountPercentage}% off
           </Typography>
+          <AddToCart {...{ availableQuantity, slug }} />
         </div>
       </div>
     </>

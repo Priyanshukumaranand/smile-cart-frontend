@@ -9,9 +9,8 @@ const ProductListItem = ({
   image_url: imageUrl,
   name,
   offer_price: offerPrice,
-  isInCart,
-  toggleIsInCart,
   slug,
+  availableQuantity,
 }) => (
   <Link
     className="neeto-ui-border-black neeto-ui-rounded-xl flex w-48 flex-col items-center justify-between border p-4"
@@ -22,7 +21,7 @@ const ProductListItem = ({
       {name}
     </Typography>
     <Typography>${offerPrice}</Typography>
-    <AddToCart {...{ slug }} />
+    <AddToCart {...{ availableQuantity, slug }} />
   </Link>
 );
 
@@ -34,6 +33,7 @@ ProductListItem.propTypes = {
   slug: PropTypes.string.isRequired,
   isInCart: PropTypes.bool.isRequired,
   toggleIsInCart: PropTypes.func.isRequired,
+  availableQuantity: PropTypes.number.isRequired,
 };
 
 export default ProductListItem;

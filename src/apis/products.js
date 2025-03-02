@@ -1,11 +1,9 @@
 import axios from "axios";
 
 const show = slug =>
-  axios
-    .get(
-      `https://smile-cart-backend-staging.neetodeployapp.com/products/${slug}`
-    )
-    .then(res => console.log(res));
+  axios.get(
+    `https://smile-cart-backend-staging.neetodeployapp.com/products/${slug}`
+  );
 const fetch = params =>
   axios.get("https://smile-cart-backend-staging.neetodeployapp.com/products/", {
     params,
