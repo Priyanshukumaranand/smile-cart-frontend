@@ -26,8 +26,8 @@ const ProductList = () => {
     try {
       const {
         data: { products },
-      } = await productsApi.fetch({ searchTerm: debouncedSearchKey });
-      // console.log(products);
+      } = await productsApi.fetch({ search_term: debouncedSearchKey });
+      console.log(products);
       setProducts(products);
     } catch (error) {
       console.log("An error occurred:", error);

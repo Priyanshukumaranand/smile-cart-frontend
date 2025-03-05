@@ -16,7 +16,7 @@ const ProductCard = ({
   available_quantity: availableQuantity,
 }) => {
   const [shouldShowDeleteAlert, setShouldShowDeleteAlert] = useState(false);
-  const removeCartItem = useCartItemsStore(prop("removeCartItem"));
+  const removeCartItem = useCartItemsStore.pickFrom();
 
   return (
     <div className="neeto-ui-rounded neeto-ui-border-black border p-2">

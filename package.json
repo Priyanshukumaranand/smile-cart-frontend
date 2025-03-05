@@ -183,7 +183,8 @@
   },
   "babel": {
     "presets": [
-      "react-app"
+      "react-app",
+      "@bigbinary/neeto"
     ]
   }
 }
