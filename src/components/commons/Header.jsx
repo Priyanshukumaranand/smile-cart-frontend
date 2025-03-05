@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import useCartItemsStore from "stores/useCartItemsStore";
 import { keys } from "ramda";
+import { Link } from "react-router-dom";
+import routes from "routes";
 // import { useContext } from "react";
 // import CartItemsContext from "src/contexts/CartItemsContext";
 
@@ -36,7 +38,9 @@ const Header = ({ title, actionBlock, shouldShowBackButton = true }) => {
                 {cartItemsCount}
               </span>
             )}
-            <AiOutlineShoppingCart size="2rem" />
+            <Link to={routes.products.cart}>
+              <AiOutlineShoppingCart size="2rem" />
+            </Link>
           </div>
         </div>
       </div>

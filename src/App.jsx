@@ -5,16 +5,20 @@ import ProductList from "./components/ProductList";
 import PageNotFound from "components/commons/PageNotFound";
 import { Redirect } from "react-router";
 import CartItemsContext from "./contexts/CartItemsContext";
+import Cart from "components/Cart";
+import routes from "routes";
 
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
+  // console.log(routes.products.cart );
   return (
     <>
       <CartItemsContext.Provider value={[cartItems, setCartItems]}>
         <Switch>
-          <Route exact component={ProductList} path="/products" />
-          <Route exact component={Product} path="/products/:slug" />
-          <Redirect exact from="/" to="/products" />
+          <Route exact component={ProductList} path={routes.products.index} />
+          <Route exact component={Product} path={routes.products.show} />
+          <Route exact component={Cart} path={routes.products.cart} />
+          <Redirect exact from={routes.root} to={routes.products.index} />
           <Route component={PageNotFound} path="*" />
         </Switch>
       </CartItemsContext.Provider>

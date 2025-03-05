@@ -5,14 +5,18 @@ import { isNotNil, append } from "ramda";
 import Carousel from "./Carousel";
 import productsApi from "apis/products";
 import { Header, PageNotFound, PageLoader } from "components/commons";
-import { error } from "bfj/src/events";
 import AddToCart from "components/commons/AddToCart";
+import useSelectedQuantity from "components/hooks/useSelectedQuantity";
+import { Button } from "neetoui";
+import routes from "routes";
+// import { error } from "bfj/src/events";
 // import { LeftArrow } from "neetoicons";
 // import axios from "axios";
 // import { IMAGE_URLS } from "./constants";
 
 const Product = () => {
   const { slug } = useParams();
+  const { selectedQuantity, setSelectedQuantity } = useSelectedQuantity(slug);
   // const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState({});
@@ -76,7 +80,16 @@ const Product = () => {
           <Typography className="font-semibold text-green-600">
             {discountPercentage}% off
           </Typography>
-          <AddToCart {...{ availableQuantity, slug }} />
+          <div className="flex space-x-10">
+            <AddToCart {...{ availableQuantity, slug }} />
+            <Button
+              className="bg-neutral-800 hover:bg-neutral-950"
+              label="Buy now"
+              size="large"
+              to={routes.checkout}
+              onClick={() => setSelectedQuantity(selectedQuantity || 1)}
+            />
+          </div>
         </div>
       </div>
     </>

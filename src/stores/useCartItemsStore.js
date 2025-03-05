@@ -1,4 +1,4 @@
-import { assoc, dissoc } from "ramda";
+import { assoc, dissoc, evolve } from "ramda";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { isNotEmpty } from "neetocist";
@@ -14,6 +14,7 @@ const useCartItemsStore = create(
           }
           return { cartItems: assoc(slug, String(quantity), cartItems) };
         }),
+      removeCartItem: slug => set(evolve({ cartItems: dissoc(slug) })),
     }),
     { name: "cart-items-store" }
   )
