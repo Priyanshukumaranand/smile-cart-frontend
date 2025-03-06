@@ -6,14 +6,18 @@ import "./common/i18n";
 import App from "./App";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+import { QueryClientProvider } from "react-query";
+import queryClient from "utils/queryClient";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ToastContainer />
-      <App />
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <ToastContainer />
+        <App />
+      </BrowserRouter>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

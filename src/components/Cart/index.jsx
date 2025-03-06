@@ -10,6 +10,8 @@ import { Toastr } from "neetoui";
 import PriceCard from "./PriceCard";
 import { cartTotalOf } from "components/utils";
 import { MRP, OFFER_PRICE } from "../commons/constants";
+import i18n from "i18next";
+import withTitle from "utils/withTitle";
 // import { shallow } from "zustand/shallow";
 // import NoData from "neetoui";
 // import { use } from "react";
@@ -70,6 +72,9 @@ const Cart = () => {
   }
   return (
     <>
+      {/* <Helmet>
+        <title>My cart</title>
+      </Helmet> */}
       <Header title="My Cart" />
       <div className="mt-10 flex justify-center space-x-10">
         <div className="w-1/3 space-y-5">
@@ -87,4 +92,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default withTitle(Cart, i18n.t("cart.title"));
