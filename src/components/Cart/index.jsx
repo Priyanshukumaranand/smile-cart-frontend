@@ -12,51 +12,55 @@ import { cartTotalOf } from "components/utils";
 import { MRP, OFFER_PRICE } from "../commons/constants";
 import i18n from "i18next";
 import withTitle from "utils/withTitle";
+import { NoData } from "neetoui";
+import { useFetchCartProducts } from "hooks/reactQuery/useProductsApi";
 // import { shallow } from "zustand/shallow";
 // import NoData from "neetoui";
 // import { use } from "react";
 
 const Cart = () => {
-  // const slugs = useCartItemsStore(store => keys(store.cartItems), shallow);
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const { cartItems, setSelectedQuantity } = useCartItemsStore.pick();
-
+  const slugs = useCartItemsStore(store => keys(store.cartItems));
+  // const [products, setProducts] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const { cartItems, setSelectedQuantity } = useCartItemsStore.pick();
+  const { data: responses = [], isLoading } = useFetchCartProducts(slugs);
+  const products = responses.map(response => response.data);
+  // console.log(products);
   const totalMrp = cartTotalOf(products, MRP);
   const totalOfferPrice = cartTotalOf(products, OFFER_PRICE);
-  console.log(OFFER_PRICE);
-  const slugs = keys(cartItems);
+  // console.log(OFFER_PRICE);
+  // const slugs = keys(cartItems);
 
-  const fetchCartProducts = async () => {
-    try {
-      const responses = await Promise.all(
-        slugs.map(slug => productsApi.show(slug))
-      );
-      const fetchedProducts = responses.map(response => response.data);
-      setProducts(fetchedProducts);
-      console.log(fetchedProducts);
-      fetchedProducts.forEach(
-        ({ available_quantity: availableQuantity, name, slug }) => {
-          if (availableQuantity >= cartItems[slug]) return;
-          setSelectedQuantity(slug, availableQuantity);
-          if (availableQuantity === 0) {
-            Toastr.error(
-              `${name} is no longer available and has been removed from cart`,
-              { autoClose: 2000 }
-            );
-          }
-        }
-      );
-    } catch (error) {
-      console.log("An error occurred:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const fetchCartProducts = async () => {
+  //   try {
+  //     const responses = await Promise.all(
+  //       slugs.map(slug => productsApi.show(slug))
+  //     );
+  //     const fetchedProducts = responses.map(response => response.data);
+  //     setProducts(fetchedProducts);
+  //     console.log(fetchedProducts);
+  //     fetchedProducts.forEach(
+  //       ({ available_quantity: availableQuantity, name, slug }) => {
+  //         if (availableQuantity >= cartItems[slug]) return;
+  //         setSelectedQuantity(slug, availableQuantity);
+  //         if (availableQuantity === 0) {
+  //           Toastr.error(
+  //             `${name} is no longer available and has been removed from cart`,
+  //             { autoClose: 2000 }
+  //           );
+  //         }
+  //       }
+  //     );
+  //   } catch (error) {
+  //     console.log("An error occurred:", error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchCartProducts();
-  }, [cartItems]);
+  // useEffect(() => {
+  //   fetchCartProducts();
+  // }, [cartItems]);
 
   if (isLoading) return <PageLoader />;
   if (isEmpty(products)) {
