@@ -1,6 +1,7 @@
 import useSelectedQuantity from "components/hooks/useSelectedQuantity";
 import { TooltipWrapper } from "components/commons";
 import { useRef } from "react";
+import { useShowProduct } from "hooks/reactQuery/useProductsApi";
 import { Toastr, Input, Button } from "neetoui";
 import { VALID_COUNT_REGEX } from "./constants";
 import PropTypes from "prop-types";
@@ -9,7 +10,9 @@ import PropTypes from "prop-types";
 // import useCartItemsStore from "stores/useCartItemsStore";
 // import { shallow } from "zustand/shallow";
 
-const ProductQuantity = ({ slug, availableQuantity }) => {
+const ProductQuantity = ({ slug }) => {
+  const { data: product = {} } = useShowProduct(slug);
+  const { availableQuantity } = product;
   const { selectedQuantity, setSelectedQuantity } = useSelectedQuantity(slug);
 
   const countInputFocus = useRef(null);

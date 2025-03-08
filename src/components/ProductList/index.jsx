@@ -1,44 +1,54 @@
 import { useState, useEffect } from "react";
-import productsApi from "apis/products";
 import { Header, PageLoader } from "components/commons";
 import { Search } from "neetoicons";
 import { Input, NoData } from "neetoui";
 import { isEmpty } from "ramda";
 import ProductListItem from "./ProductListItem";
 import useDebounce from "hooks/useDebounce";
-import { without } from "ramda";
+import { useFetchProducts } from "hooks/reactQuery/useProductsApi";
+import { data } from "browserslist";
+// import productsApi from "apis/products";
+// import { without } from "ramda";
 
 const ProductList = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [products, setProducts] = useState([]);
-  const [searchKey, setSearchKey] = useState("");
-  const debouncedSearchKey = useDebounce(searchKey);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [searchKey, setSearchKey] = useState("");
 
-  const toggleIsInCart = slug =>
-    setCartItems(prevCartItems =>
-      prevCartItems.includes(slug)
-        ? without([slug], cartItems)
-        : [slug, ...cartItems]
-    );
+  const debouncedSearchKey = useDebounce(searchKey);
 
-  const fetchProducts = async () => {
-    try {
-      const {
-        data: { products },
-      } = await productsApi.fetch({ search_term: debouncedSearchKey });
-      console.log(products);
-      setProducts(products);
-    } catch (error) {
-      console.log("An error occurred:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const { isLoading, data } = useFetchProducts({
+    search_term: debouncedSearchKey,
+  });
+  const products = data?.data?.products ?? [];
+  // console.log(useFetchProducts({
+  //   search_term: debouncedSearchKey,
+  // }))
+  // const toggleIsInCart = slug =>
+  //   setCartItems(prevCartItems =>
+  //     prevCartItems.includes(slug)
+  //       ? without([slug], cartItems)
+  //       : [slug, ...cartItems]
+  //   );
 
-  useEffect(() => {
-    fetchProducts();
-  }, [debouncedSearchKey]);
+  // const fetchProducts = async () => {
+  //   try {
+  //     const {
+  //       data: { products },
+  //     } = await productsApi.fetch({ search_term: debouncedSearchKey });
+  //     console.log(products);
+  //     setProducts(products);
+  //   } catch (error) {
+  //     console.log("An error occurred:", error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchProducts();
+  // }, [debouncedSearchKey]);
 
   if (isLoading) {
     return <PageLoader />;
@@ -46,7 +56,7 @@ const ProductList = () => {
   return (
     <div className="flex h-screen flex-col">
       <Header
-        cartItemsCount={cartItems.length}
+        // cartItemsCount={cartItems.length}
         shouldShowBackButton={false}
         title="Smile Cart"
         actionBlock={

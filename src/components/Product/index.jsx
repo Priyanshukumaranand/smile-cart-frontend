@@ -9,6 +9,7 @@ import AddToCart from "components/commons/AddToCart";
 import useSelectedQuantity from "components/hooks/useSelectedQuantity";
 import { Button } from "neetoui";
 import routes from "routes";
+import { useShowProduct } from "hooks/reactQuery/useProductsApi";
 // import { error } from "bfj/src/events";
 // import { LeftArrow } from "neetoicons";
 // import axios from "axios";
@@ -16,26 +17,27 @@ import routes from "routes";
 
 const Product = () => {
   const { slug } = useParams();
+  const { data: product = {}, isLoading, isError } = useShowProduct(slug);
   const { selectedQuantity, setSelectedQuantity } = useSelectedQuantity(slug);
   // const history = useHistory();
-  const [isLoading, setIsLoading] = useState(true);
-  const [product, setProduct] = useState({});
-  const [isError, setIsError] = useState(false);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [product, setProduct] = useState({});
+  // const [isError, setIsError] = useState(false);
 
-  const fetchProduct = async () => {
-    try {
-      const response = await productsApi.show(slug);
-      // console.log(response.data);
-      setProduct(response);
-    } catch (error) {
-      setIsError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const fetchProduct = async () => {
+  //   try {
+  //     const response = await productsApi.show(slug);
+  //     // console.log(response.data);
+  //     setProduct(response);
+  //   } catch (error) {
+  //     setIsError(true);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   useEffect(() => {
-    fetchProduct();
+    // fetchProduct();
   }, []);
   // console.log(product);
   const {
@@ -65,7 +67,7 @@ const Product = () => {
         <div className="w-2/5">
           <div className="flex justify-center gap-16">
             {isNotNil(imageUrls) ? (
-              <Carousel imageUrls={append(imageUrl, imageUrls)} title={name} />
+              <Carousel />
             ) : (
               <img alt={name} className="w-48" src={imageUrl} />
             )}
