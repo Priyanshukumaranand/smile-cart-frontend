@@ -43,7 +43,7 @@ const PriceCard = ({ totalMrp, totalOfferPrice }) => {
         <Button
           className="bg-neutral-800"
           label={t("buyNow")}
-          to={routes.checkout}
+          to={routes.products.checkout}
         />
       </div>
     </div>

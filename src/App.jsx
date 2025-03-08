@@ -7,7 +7,7 @@ import { Redirect } from "react-router";
 import CartItemsContext from "./contexts/CartItemsContext";
 import Cart from "components/Cart";
 import routes from "routes";
-
+import Checkout from "components/Checkout";
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
   // console.log(routes.products.cart );
@@ -18,7 +18,7 @@ const App = () => {
           <Route exact component={ProductList} path={routes.products.index} />
           <Route exact component={Product} path={routes.products.show} />
           <Route exact component={Cart} path={routes.products.cart} />
-          <Route exact component={Checkout} path={routes.checkout} />
+          <Route exact component={Checkout} path={routes.products.checkout} />
           <Redirect exact from={routes.root} to={routes.products.index} />
           <Route component={PageNotFound} path="*" />
         </Switch>

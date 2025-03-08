@@ -34,6 +34,7 @@ const ProductList = () => {
 
   const { data, isLoading } = useFetchProducts(productsParams);
   const products = data?.data?.products || [];
+  console.log(products);
   const totalProductsCount = data?.data?.total_products_count;
 
   const handlePageNavigation = page =>

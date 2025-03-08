@@ -14,12 +14,15 @@ import Form from "./Form";
 
 const Checkout = () => {
   const { t } = useTranslation();
-  const { isLoading } = useFetchCountries();
+
   const history = useHistory();
+
+  const { isLoading } = useFetchCountries();
 
   const handleRedirect = () => {
     history.goBack();
   };
+
   if (isLoading) return <PageLoader />;
 
   return (
@@ -47,7 +50,7 @@ const Checkout = () => {
             </Typography>
           </div>
           <div className="mt-8 space-y-4">
-            {/* Form will be displayed here */}
+            <Form />
           </div>
         </div>
         <div className="neeto-ui-bg-gray-300 h-screen w-1/2 pt-10">
