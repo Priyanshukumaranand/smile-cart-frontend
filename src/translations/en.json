@@ -8,12 +8,20 @@
   "cart": {
     "title": "My cart"
   },
+  "error": {
+    "noInternetConnection": "No Internet Connection",
+    "networkError": "Network Error"
+  },
+  "order": {
+    "successfullyPlaced": "Order has been successfully placed"
+  },
   "checkout": "Checkout",
   "contact": "Contact",
   "email": "Email",
   "enterYourEmail": "Enter your email",
   "shippingAddress": "Shipping address",
   "country": "Country",
+  "confirmOrder": "Confirm order",
   "selectCountry": "Select the country",
   "firstName": "First name",
   "enterFirstName": "Enter first name",
@@ -29,6 +37,9 @@
   "selectState": "Select the state",
   "zipCode": "Zip code",
   "enterZipCode": "Enter zip code",
+  "subtotal": "Subtotal <span>${{totalPrice}}</span>",
+  "totalPayablePrice": "Total Payable <span>${{totalPrice}}</span>",
+  "deliveryCharges": "Delivery charges <span>FREE</span>",
   "validations": {
     "emailRequired": "Email address is required",
     "firstNameRequired": "First name is required",
@@ -38,6 +49,7 @@
     "cityRequired": "City is required",
     "stateRequired": "State is required",
     "zipCodeRequired": "Zip code is required",
-    "emailInvalid": "Email address is invalid"
+    "emailInvalid": "Email address is invalid",
+    "saveInformationForNextTime": "Save this information for next time"
   }
 }
