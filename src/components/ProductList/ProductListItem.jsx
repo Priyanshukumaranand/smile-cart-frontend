@@ -31,8 +31,6 @@ ProductListItem.propTypes = {
   name: PropTypes.string.isRequired,
   offer_price: PropTypes.number.isRequired,
   slug: PropTypes.string.isRequired,
-  isInCart: PropTypes.bool.isRequired,
-  toggleIsInCart: PropTypes.func.isRequired,
   available_quantity: PropTypes.number.isRequired,
 };
 

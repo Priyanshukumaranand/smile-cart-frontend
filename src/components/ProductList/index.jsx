@@ -15,27 +15,21 @@ import { filterNonNull } from "neetocist";
 import useFuncDebounce from "hooks/useFuncDebounce";
 
 const ProductList = () => {
-  // const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE_INDEX);
-  // const [cartItems, setCartItems] = useState([]);
   const history = useHistory();
   const queryParams = useQueryParams();
   const { page, pageSize, searchTerm = "" } = queryParams;
   const [searchKey, setSearchKey] = useState(searchTerm);
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [products, setProducts] = useState([]);
-
-  // const debouncedSearchKey = useDebounce(searchKey);
 
   const productsParams = {
-    searchTerm,
+    search_term: searchTerm,
     page: Number(page) || DEFAULT_PAGE_INDEX,
-    pageSize: Number(pageSize) || DEFAULT_PAGE_SIZE,
+    page_size: Number(pageSize) || DEFAULT_PAGE_SIZE,
   };
 
   const { data, isLoading } = useFetchProducts(productsParams);
   const products = data?.data?.products || [];
-  console.log(products);
   const totalProductsCount = data?.data?.total_products_count;
+  console.log(searchTerm);
 
   const handlePageNavigation = page =>
     history.replace(
@@ -60,7 +54,6 @@ const ProductList = () => {
   return (
     <div className="flex h-screen flex-col">
       <Header
-        // cartItemsCount={cartItems.length}
         shouldShowBackButton={false}
         title="Smile Cart"
         actionBlock={
@@ -87,8 +80,8 @@ const ProductList = () => {
       )}
       <div className="mb-5 self-end">
         <Pagination
-          navigate={handlePageNavigation}
           count={totalProductsCount}
+          navigate={handlePageNavigation}
           pageNo={Number(page) || DEFAULT_PAGE_INDEX}
           pageSize={Number(pageSize) || DEFAULT_PAGE_SIZE}
         />
@@ -97,28 +90,3 @@ const ProductList = () => {
   );
 };
 export default ProductList;
-
-// const fetchProducts = async () => {
-//   try {
-//     const {
-//       data: { products },
-//     } = await productsApi.fetch({ search_term: debouncedSearchKey });
-//     console.log(products);
-//     setProducts(products);
-//   } catch (error) {
-//     console.log("An error occurred:", error);
-//   } finally {
-//     setIsLoading(false);
-//   }
-// };
-
-// useEffect(() => {
-//   fetchProducts();
-// }, [debouncedSearchKey]);
-
-// const toggleIsInCart = slug =>
-//   setCartItems(prevCartItems =>
-//     prevCartItems.includes(slug)
-//       ? without([slug], cartItems)
-//       : [slug, ...cartItems]
-//   );

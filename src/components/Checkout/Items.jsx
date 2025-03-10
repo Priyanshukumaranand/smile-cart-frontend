@@ -15,8 +15,9 @@ const Items = ({ isSubmitDisabled }) => {
 
   const slugs = useCartItemsStore(store => keys(store.cartItems), shallow);
 
-  const { data: products = [] } = useFetchCartProducts(slugs);
-
+  const productsResponses = useFetchCartProducts(slugs);
+  const products = productsResponses.data.map(response => response.data) || [];
+  // console.log(products);
   const totalCheckoutPrice = cartTotalOf(products, OFFER_PRICE);
 
   return (

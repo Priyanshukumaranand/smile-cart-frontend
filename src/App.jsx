@@ -8,9 +8,9 @@ import CartItemsContext from "./contexts/CartItemsContext";
 import Cart from "components/Cart";
 import routes from "routes";
 import Checkout from "components/Checkout";
+
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
-  // console.log(routes.products.cart );
   return (
     <>
       <CartItemsContext.Provider value={[cartItems, setCartItems]}>
@@ -28,14 +28,3 @@ const App = () => {
 };
 
 export default App;
-
-{
-  /* <div className="flex space-x-2">
-<NavLink exact activeClassName="underline font-bold" to="/">
-  Home
-</NavLink>
-<NavLink exact activeClassName="underline font-bold" to="/product">
-  Product
-</NavLink>
-</div> */
-}

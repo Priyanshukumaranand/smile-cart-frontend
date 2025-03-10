@@ -1,7 +1,7 @@
 import { Typography, Tag } from "neetoui";
 import useCartItemsStore from "stores/useCartItemsStore";
 
-const Product = ({ name, imageUrl, offerPrice, slug }) => {
+const Product = ({ name, image_url, offer_price, slug }) => {
   const { [slug]: selectedQuantity } = useCartItemsStore.pick("cartItems");
 
   return (
@@ -11,7 +11,7 @@ const Product = ({ name, imageUrl, offerPrice, slug }) => {
           alt={name}
           className="neeto-ui-rounded"
           height={60}
-          src={imageUrl}
+          src={image_url}
           width={60}
         />
         <div className="absolute right-0 top-0 -mr-2 -mt-2">
@@ -22,7 +22,7 @@ const Product = ({ name, imageUrl, offerPrice, slug }) => {
         <Typography style="h5" weight="semibold">
           {name}
         </Typography>
-        <Typography style="h5">${offerPrice}</Typography>
+        <Typography style="h5">${offer_price}</Typography>
       </div>
     </div>
   );
