@@ -12,6 +12,7 @@ import PropTypes from "prop-types";
 
 const ProductQuantity = ({ slug }) => {
   const { data: product = {} } = useShowProduct(slug);
+  // console.log(product);
   const { availableQuantity } = product;
   const { selectedQuantity, setSelectedQuantity } = useSelectedQuantity(slug);
 

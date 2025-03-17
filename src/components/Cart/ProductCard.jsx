@@ -15,6 +15,7 @@ const ProductCard = ({
   name,
   available_quantity: availableQuantity,
 }) => {
+  console.log(slug);
   const [shouldShowDeleteAlert, setShouldShowDeleteAlert] = useState(false);
   const removeCartItem = useCartItemsStore.pickFrom();
 
