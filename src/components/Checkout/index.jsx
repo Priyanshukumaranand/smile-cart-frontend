@@ -1,11 +1,12 @@
 import i18n from "i18next";
 import { LeftArrow } from "neetoicons";
-import { Typography, Checkbox, Button } from "neetoui";
+import { Typography, Checkbox } from "neetoui";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import withTitle from "utils/withTitle";
 import { PageLoader } from "components/commons";
+import routes from "routes";
 import {
   useFetchCountries,
   useCreateOrder,
@@ -28,7 +29,6 @@ const Checkout = () => {
   const timerRef = useRef(null);
   const { cartItems, clearCart } = useCartItemsStore.pick();
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
-  // const { mutate: createOrder } = useCreateOrder();
   const history = useHistory();
   const checkboxRef = useRef(null);
   const checkoutFormData = getFromLocalStorage(CHECKOUT_LOCAL_STORAGE_KEY);
@@ -66,6 +66,7 @@ const Checkout = () => {
       { payload: values },
       {
         onSuccess: () => {
+          setToLocalStorage(CHECKOUT_LOCAL_STORAGE_KEY, dataToPersist);
           redirectToHome();
         },
         onError: () => setIsSubmitDisabled(false),
@@ -113,14 +114,6 @@ const Checkout = () => {
         <div className="neeto-ui-bg-gray-300 h-screen w-1/2 pt-10">
           {/* Items added to cart will be displayed here */}
           <Items {...{ isSubmitDisabled }} />
-          {/* <div className="mt-auto flex justify-center">
-            <Button
-              className="bg-neutral-800 w-1/3 justify-center"
-              disabled={isSubmitDisabled}
-              label={t("confirmOrder")}
-              type="submit"
-            />
-          </div> */}
         </div>
       </div>
     </NeetoUIForm>

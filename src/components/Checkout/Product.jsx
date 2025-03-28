@@ -1,5 +1,6 @@
 import { Typography, Tag } from "neetoui";
 import useCartItemsStore from "stores/useCartItemsStore";
+import PropTypes from "prop-types";
 
 const Product = ({ name, image_url, offer_price, slug }) => {
   const { [slug]: selectedQuantity } = useCartItemsStore.pick("cartItems");
@@ -26,6 +27,12 @@ const Product = ({ name, image_url, offer_price, slug }) => {
       </div>
     </div>
   );
+};
+Product.propTypes = {
+  name: PropTypes.string.isRequired,
+  image_url: PropTypes.string.isRequired,
+  offer_price: PropTypes.number.isRequired,
+  slug: PropTypes.string.isRequired,
 };
 
 export default Product;

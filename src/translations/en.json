@@ -36,6 +36,7 @@
   "state": "State",
   "selectState": "Select the state",
   "zipCode": "Zip code",
+  "saveInformationForNextTime": "Save this information for next time",
   "enterZipCode": "Enter zip code",
   "subtotal": "Subtotal <span>${{totalPrice}}</span>",
   "totalPayablePrice": "Total Payable <span>${{totalPrice}}</span>",
@@ -49,7 +50,6 @@
     "cityRequired": "City is required",
     "stateRequired": "State is required",
     "zipCodeRequired": "Zip code is required",
-    "emailInvalid": "Email address is invalid",
-    "saveInformationForNextTime": "Save this information for next time"
+    "emailInvalid": "Email address is invalid"
   }
 }

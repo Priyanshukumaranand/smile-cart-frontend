@@ -29,7 +29,7 @@ const ProductList = () => {
   const { data, isLoading } = useFetchProducts(productsParams);
   const products = data?.data?.products || [];
   const totalProductsCount = data?.data?.total_products_count;
-  console.log(searchTerm);
+  // console.log(searchTerm);
 
   const handlePageNavigation = page =>
     history.replace(

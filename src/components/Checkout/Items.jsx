@@ -1,4 +1,5 @@
 import { OFFER_PRICE } from "components/commons/constants";
+import PropTypes from "prop-types";
 import { cartTotalOf } from "components/utils";
 import { useFetchCartProducts } from "hooks/reactQuery/useProductsApi";
 import { Button } from "neetoui";
@@ -44,6 +45,9 @@ const Items = ({ isSubmitDisabled }) => {
       </div>
     </div>
   );
+};
+Items.propTypes = {
+  isSubmitDisabled: PropTypes.bool.isRequired,
 };
 
 export default Items;

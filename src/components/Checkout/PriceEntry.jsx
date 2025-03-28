@@ -11,4 +11,12 @@ const PriceEntry = ({ totalPrice, i18nKey, className = "" }) => (
   </Typography>
 );
 
+import PropTypes from "prop-types";
+
+PriceEntry.propTypes = {
+  totalPrice: PropTypes.number.isRequired,
+  i18nKey: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};
+
 export default PriceEntry;
