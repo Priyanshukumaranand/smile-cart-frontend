@@ -8,7 +8,7 @@ import { useQuery, useMutation } from "react-query";
 export const useFetchCountries = () =>
   useQuery({
     queryKey: QUERY_KEYS.COUNTRIES,
-    queryFn: () => countriesApi.fetch().then(res => res.data),
+    queryFn: () => countriesApi.fetch(),
     select: prop("countries"),
     staleTime: Infinity,
   });
@@ -16,7 +16,7 @@ export const useFetchCountries = () =>
 export const useFetchStates = stateParams =>
   useQuery({
     queryKey: [QUERY_KEYS.STATES, stateParams],
-    queryFn: () => statesApi.fetch(stateParams).then(res => res.data),
+    queryFn: () => statesApi.fetch(stateParams),
     select: prop("states"),
     staleTime: Infinity,
   });

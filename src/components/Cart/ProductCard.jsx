@@ -7,14 +7,7 @@ import useCartItemsStore from "stores/useCartItemsStore";
 import { Alert } from "neetoui";
 import { useState } from "react";
 
-const ProductCard = ({
-  slug,
-  image_url: imageUrl,
-  offer_price: offerPrice,
-  mrp,
-  name,
-  available_quantity: availableQuantity,
-}) => {
+const ProductCard = ({ slug, imageUrl, offerPrice, mrp, name }) => {
   // console.log(slug);
   const [shouldShowDeleteAlert, setShouldShowDeleteAlert] = useState(false);
   const removeCartItem = useCartItemsStore.pickFrom();
@@ -30,9 +23,8 @@ const ProductCard = ({
           <Typography style="body2">MRP: ${mrp}</Typography>
           <Typography style="body2">Offer price: ${offerPrice}</Typography>
         </div>
-        {/* <ProductQuantity {...{ availableQuantity, slug }} /> */}
         <div className="flex items-center space-x-2">
-          <ProductQuantity {...{ availableQuantity, slug }} />
+          <ProductQuantity {...{ slug }} />
           <Delete
             className="cursor-pointer"
             onClick={() => setShouldShowDeleteAlert(true)}
@@ -61,11 +53,10 @@ const ProductCard = ({
 
 ProductCard.propTypes = {
   slug: PropTypes.string.isRequired,
-  image_url: PropTypes.string.isRequired,
-  offer_price: PropTypes.number.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  offerPrice: PropTypes.number.isRequired,
   mrp: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  available_quantity: PropTypes.number.isRequired,
 };
 
 export default ProductCard;

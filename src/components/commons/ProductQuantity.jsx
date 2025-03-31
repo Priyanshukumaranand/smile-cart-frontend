@@ -84,7 +84,6 @@ const ProductQuantity = ({ slug }) => {
 
 ProductQuantity.propTypes = {
   slug: PropTypes.string.isRequired,
-  availableQuantity: PropTypes.number.isRequired,
 };
 
 export default ProductQuantity;

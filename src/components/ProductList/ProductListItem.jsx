@@ -5,13 +5,7 @@ import routes from "routes";
 import { buildUrl } from "utils/url";
 import AddToCart from "../commons/AddToCart";
 
-const ProductListItem = ({
-  image_url: imageUrl,
-  name,
-  offer_price: offerPrice,
-  slug,
-  available_quantity: availableQuantity,
-}) => (
+const ProductListItem = ({ imageUrl, name, offerPrice, slug }) => (
   <Link
     className="neeto-ui-border-black neeto-ui-rounded-xl flex w-48 flex-col items-center justify-between border p-4"
     to={buildUrl(routes.products.show, { slug })}
@@ -21,17 +15,16 @@ const ProductListItem = ({
       {name}
     </Typography>
     <Typography>${offerPrice}</Typography>
-    <AddToCart {...{ availableQuantity, slug }} />
+    <AddToCart {...{ slug }} />
   </Link>
 );
 
 //for fixing the prop types (not-required)
 ProductListItem.propTypes = {
-  image_url: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  offer_price: PropTypes.number.isRequired,
+  offerPrice: PropTypes.number.isRequired,
   slug: PropTypes.string.isRequired,
-  available_quantity: PropTypes.number.isRequired,
 };
 
 export default ProductListItem;

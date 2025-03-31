@@ -21,14 +21,15 @@ const ProductList = () => {
   const [searchKey, setSearchKey] = useState(searchTerm);
 
   const productsParams = {
-    search_term: searchTerm,
+    searchTerm,
     page: Number(page) || DEFAULT_PAGE_INDEX,
-    page_size: Number(pageSize) || DEFAULT_PAGE_SIZE,
+    pageSize: Number(pageSize) || DEFAULT_PAGE_SIZE,
   };
 
-  const { data, isLoading } = useFetchProducts(productsParams);
-  const products = data?.data?.products || [];
-  const totalProductsCount = data?.data?.total_products_count;
+  const { data: { products = [], totalProductsCount } = {}, isLoading } =
+    useFetchProducts(productsParams);
+  // const products = data?.data?.products || [];
+  // const totalProductsCount = data?.data?.total_products_count;
   // console.log(searchTerm);
 
   const handlePageNavigation = page =>

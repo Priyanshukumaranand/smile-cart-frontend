@@ -16,11 +16,10 @@ const Items = ({ isSubmitDisabled }) => {
 
   const slugs = useCartItemsStore(store => keys(store.cartItems), shallow);
 
-  const productsResponses = useFetchCartProducts(slugs);
-  const products = productsResponses.data.map(response => response.data) || [];
+  const { data: products = [] } = useFetchCartProducts(slugs);
   // console.log(products);
   const totalCheckoutPrice = cartTotalOf(products, OFFER_PRICE);
-
+  console.log(totalCheckoutPrice);
   return (
     <div className="flex h-full flex-col p-10">
       {products.map(product => (
@@ -28,7 +27,11 @@ const Items = ({ isSubmitDisabled }) => {
       ))}
       <div className="mt-5 w-3/4 space-y-3">
         <PriceEntry i18nKey="subtotal" totalPrice={totalCheckoutPrice} />
-        <PriceEntry className="text-green-700" i18nKey="deliveryCharges" />
+        <PriceEntry
+          className="text-green-700"
+          i18nKey="deliveryCharges"
+          totalPrice={totalCheckoutPrice}
+        />
         <div className="neeto-ui-border-black border-t border-dashed" />
         <PriceEntry
           i18nKey="totalPayablePrice"

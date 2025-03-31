@@ -5,9 +5,12 @@ import PageLoader from "components/commons/PageLoader";
 import ProductCard from "components/Cart/ProductCard";
 import PriceCard from "./PriceCard";
 import { cartTotalOf } from "components/utils";
+import { NoData } from "neetoui";
+import { useTranslation } from "react-i18next";
 import { MRP, OFFER_PRICE } from "../commons/constants";
 import i18n from "i18next";
 import withTitle from "utils/withTitle";
+import { shallow } from "zustand/shallow";
 import { useFetchCartProducts } from "hooks/reactQuery/useProductsApi";
 // import { useState } from "react";
 // import { Toastr } from "neetoui";
@@ -16,9 +19,10 @@ import { useFetchCartProducts } from "hooks/reactQuery/useProductsApi";
 // import productsApi from "apis/products";
 
 const Cart = () => {
-  const slugs = useCartItemsStore(store => keys(store.cartItems));
-  const { data: responses = [], isLoading } = useFetchCartProducts(slugs);
-  const products = responses.map(response => response.data);
+  const { t } = useTranslation();
+  const slugs = useCartItemsStore(store => keys(store.cartItems), shallow);
+  const { data: products = [], isLoading } = useFetchCartProducts(slugs);
+  // const products = responses.map(response => response.data);
   const totalMrp = cartTotalOf(products, MRP);
   const totalOfferPrice = cartTotalOf(products, OFFER_PRICE);
 
@@ -26,17 +30,16 @@ const Cart = () => {
   if (isEmpty(products)) {
     return (
       <>
-        <Header title="My Cart" />
+        <Header title={t("cart.title")} />
         <div className="flex h-screen items-center justify-center">
-          {/* <NoData title="Your cart is empty!" /> */}
-          <div>Your cart is empty!</div>
+          <NoData title={t("cart.empty")} />
         </div>
       </>
     );
   }
   return (
     <>
-      <Header title="My Cart" />
+      <Header title={t("cart.title")} />
       <div className="mt-10 flex justify-center space-x-10">
         <div className="w-1/3 space-y-5">
           {products.map(product => (

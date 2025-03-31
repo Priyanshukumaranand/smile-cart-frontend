@@ -9,13 +9,17 @@ import AddToCart from "components/commons/AddToCart";
 import useSelectedQuantity from "components/hooks/useSelectedQuantity";
 import { Button } from "neetoui";
 import routes from "routes";
+import withTitle from "utils/withTitle";
 import { useShowProduct } from "hooks/reactQuery/useProductsApi";
+import i18n from "i18next";
+import { useTranslation } from "react-i18next";
 // import { error } from "bfj/src/events";
 // import { LeftArrow } from "neetoicons";
 // import axios from "axios";
 // import { IMAGE_URLS } from "./constants";
 
 const Product = () => {
+  const { t } = useTranslation();
   const { slug } = useParams();
   const { data: product = {}, isLoading, isError } = useShowProduct(slug);
   const { selectedQuantity, setSelectedQuantity } = useSelectedQuantity(slug);
@@ -36,19 +40,12 @@ const Product = () => {
   //   }
   // };
 
-  useEffect(() => {
-    // fetchProduct();
-  }, []);
+  // useEffect(() => {
+  // fetchProduct();
+  // }, []);
   // console.log(product);
-  const {
-    name,
-    description,
-    mrp,
-    offer_price: offerPrice,
-    image_url: imageUrl,
-    image_urls: imageUrls,
-    available_quantity: availableQuantity,
-  } = product.data || {};
+  const { name, description, mrp, offerPrice, imageUrl, imageUrls } = product;
+
   // console.log(product.data);
   const totalDiscounts = mrp - offerPrice;
   const discountPercentage = ((totalDiscounts / mrp) * 100).toFixed(1);
@@ -83,7 +80,7 @@ const Product = () => {
             {discountPercentage}% off
           </Typography>
           <div className="flex space-x-10">
-            <AddToCart {...{ availableQuantity, slug }} />
+            <AddToCart {...{ slug }} />
             <Button
               className="bg-neutral-800 hover:bg-neutral-950"
               label="Buy now"
@@ -98,4 +95,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default withTitle(Product, i18n.t("product"));

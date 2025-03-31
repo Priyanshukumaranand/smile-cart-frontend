@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 // import CartItemsContext from "src/contexts/CartItemsContext";
 // import { shallow } from "zustand/shallow";
 
-const AddToCart = ({ slug, availableQuantity }) => {
+const AddToCart = ({ slug }) => {
   const { selectedQuantity, setSelectedQuantity } = useSelectedQuantity(slug);
 
   // const { isInCart, toggleIsInCart } = useCartItemsStore(
@@ -29,12 +29,11 @@ const AddToCart = ({ slug, availableQuantity }) => {
     return <Button label="Add to cart" size="large" onClick={handleClick} />;
   }
 
-  return <ProductQuantity {...{ slug, availableQuantity }} />;
+  return <ProductQuantity {...{ slug }} />;
 };
 
 AddToCart.propTypes = {
   slug: PropTypes.string.isRequired,
-  availableQuantity: PropTypes.number.isRequired,
 };
 
 export default AddToCart;

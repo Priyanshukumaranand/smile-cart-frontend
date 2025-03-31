@@ -2,7 +2,7 @@ import { Typography, Tag } from "neetoui";
 import useCartItemsStore from "stores/useCartItemsStore";
 import PropTypes from "prop-types";
 
-const Product = ({ name, image_url, offer_price, slug }) => {
+const Product = ({ name, imageUrl, offerPrice, slug }) => {
   const { [slug]: selectedQuantity } = useCartItemsStore.pick("cartItems");
 
   return (
@@ -12,7 +12,7 @@ const Product = ({ name, image_url, offer_price, slug }) => {
           alt={name}
           className="neeto-ui-rounded"
           height={60}
-          src={image_url}
+          src={imageUrl}
           width={60}
         />
         <div className="absolute right-0 top-0 -mr-2 -mt-2">
@@ -23,15 +23,16 @@ const Product = ({ name, image_url, offer_price, slug }) => {
         <Typography style="h5" weight="semibold">
           {name}
         </Typography>
-        <Typography style="h5">${offer_price}</Typography>
+        <Typography style="h5">${offerPrice}</Typography>
       </div>
     </div>
   );
 };
+
 Product.propTypes = {
   name: PropTypes.string.isRequired,
-  image_url: PropTypes.string.isRequired,
-  offer_price: PropTypes.number.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  offerPrice: PropTypes.number.isRequired,
   slug: PropTypes.string.isRequired,
 };
 

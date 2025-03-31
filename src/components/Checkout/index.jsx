@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import withTitle from "utils/withTitle";
 import { PageLoader } from "components/commons";
+import { useEffect } from "react";
 import routes from "routes";
 import {
   useFetchCountries,
@@ -75,7 +76,11 @@ const Checkout = () => {
   };
 
   if (isLoading) return <PageLoader />;
-  if (isEmpty(cartItems)) return history.push(routes.root);
+  useEffect(() => {
+    if (isEmpty(cartItems)) {
+      history.push(routes.root);
+    }
+  }, [cartItems, history]);
   return (
     <NeetoUIForm
       formProps={{ noValidate: true }}

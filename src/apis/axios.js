@@ -3,9 +3,9 @@ import {
   serializeKeysToSnakeCase,
 } from "@bigbinary/neeto-cist";
 import axios from "axios";
-import { evolve } from "ramda";
 import { t } from "i18next";
 import { Toastr } from "neetoui";
+import { evolve } from "ramda";
 
 const shouldShowToastr = response =>
   typeof response === "object" && response?.noticeCode;

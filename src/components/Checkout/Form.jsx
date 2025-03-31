@@ -21,6 +21,7 @@ const Form = () => {
   const { data: states = [] } = useFetchStates({
     country_code: country.code,
   });
+  // console.log(countries);
 
   const handleChangeCountry = country => {
     setFieldValue("country", country);
